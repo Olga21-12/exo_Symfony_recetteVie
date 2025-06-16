@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{# {% block title %}#{{ recipe.id }} {{recipe.slug}}{% endblock %} #}
+{% block title %}{{ "#"~ recipe.id ~" "~ recipe.slug}}{% endblock %}
+{% block body %}
+<div class = "row">
+    <div  align = "center" class= "col-md-6 mx-auto">
+        <article>
+            <h1> {{ recipe.title |title }}</h1>
+            <br>
+            <img style="max-width: 400px;" class="bd-placeholder-img" src={{recipe.imageName}}>
+            <p>Recette créée par {{ recipe.user.firstname }} {{ recipe.user.lastname }}</p/>
+            <p>Duration : {{ recipe.duration }} min</p>
+            <br>
+            <h5>{{ recipe.content | nl2br }}</h5>
+        </article>
+        
+
+        
+        <small>Submitted {{ recipe.createdAt | date('d/m/Y') }}</small><br>
+        <small>Updated {{ recipe.updatedAt | date('d/m/Y H:i') }}</small>
+        <br><br>
+        <a class="btn btn-primary btn-sm" href={{ path('app_recipe_edit', {id: recipe.id}) }}>Edit Recipe</a>
+        <a class="btn btn-danger btn-sm" href="{{ path('app_recipe_delete', {id: recipe.id}) }}" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</a>
+
+        <a class="btn btn-secondary btn-sm" href={{ path('app_recipe_index') }}>Go Back</a>
+
+{# <p>Recette créée par {{ user.firstname ~" "~ user.lastname }}</p> #}
+{# {{ dump(user) }} #}
+{# {{ dump(app.current_route) }} #}
+    </div>
+</div>
+{% endblock %}

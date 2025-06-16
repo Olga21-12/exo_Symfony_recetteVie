@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href={{ path ('home') }}>RecetteVie</a>
+
+            <!-- Кнопка для мобильного вида -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <!-- Меню -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav custom-nav">
+                <li class="nav-item">
+                    <a class="nav-link {{app.current_route == 'home' ? 'active' : ''}}" href={{ path('home') }}>Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{app.current_route == 'app_recipe_show' or app.current_route == 'app_recipe_index' ? 'active' : ''}}" href={{ path('app_recipe_index') }}>Liste de Recettes</a>
+                </li>
+
+                {% if app.user %}
+                <li class="nav-item ">
+                    <a class="nav-link {{ app.current_route == 'app_recipe_create' ? 'active' : '' }}" href={{ path('app_recipe_create') }}>Ajouter une Recette</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ app.current_route == 'app_account' ? 'active' : '' }}" href="#">Account</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href={{ path('app_logout') }}>Logout</a>
+                </li>
+                {% else %}
+
+                <li class="nav-item ">
+                    <a class="nav-link {{ app.current_route == 'app_register' ? 'active' : '' }}" href="#">S'enregister</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href={{ path('app_login') }}>Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        </div>
+    </nav>

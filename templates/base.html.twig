@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
+        {% block stylesheets %}{% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-YUe2LzesAfftltw+PEaao2tjU/QATaW/rOitAq67e0CT0Zi2VVRL0oC4+gAaeBKu" crossorigin="anonymous"></script>
+        {% endblock %}
+    </head>
+<body>
+    <main>
+    
+    {{ include('/layouts/partials/_nav.html.twig') }}
+    
+    <div class="container my-4">
+
+        {{ dump(app.flashes)}} <!--- для отображения сообщения для успешное редактирование, часть в RecipeController и в новом файле _flash.html.twig -->
+            
+             {{ include('/layouts/partials/_flash.html.twig') }}
+
+        {% block body %}
+        {% endblock %}
+    </div>
+    </main>
+   
+    {{ include('/layouts/partials/_footer.html.twig') }}
+</body>    
+</html>

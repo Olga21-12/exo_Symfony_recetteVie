@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{#{% block title %}Liste des recettes{% endblock %}#}
+{% block title "Liste des recettes" %} {% block body %}
+
+<div class="text-center mt-5">
+<h1>Liste de recettes</h1>
+
+<h1>{{ recipes|length }} recettes</h1> {#отображает количество рецептов на странице#}
+
+{# простое отображение списка рецептов
+<ul class="recipe-list">
+
+{{ dump(recipes.0.title) }} отображает названия, которые у нас в таблице, 0=первый рецепт
+
+    {% for recipe in recipes %}
+            <li>
+                <a href="{{ path('app_recipe_show', {id: recipe.id, slug: recipe.slug}) }}">
+                    {{ recipe.title }}
+                </a>
+            </li>
+        {% else %}
+            <li>Aucune recette trouvée</li>
+        {% endfor %}
+
+</ul>
+</div> #}
+
+{#отображение списка меню карточками с фото#}
+    <div class = "container text-center">
+        <div class = "row">
+            {% for recipe in recipes %}
+                <div class="card max-w-sm col-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4" data-type="post">
+                    <h2><a href={{ path('app_recipe_show', {id : recipe.id, slug : recipe.slug})}}>{{ recipe.title | u.truncate(10,'...',false)}} </a></h2>
+                    
+                    <div class="d-flex justify-content-center mb-3" style="height: 200px; overflow: hidden;">
+                        <img src="{{ recipe.imageName }}" alt="Image de la recette {{ recipe.title }}" class="img-fluid object-fit-cover" style="height: 100%; width: auto;">
+                    </div>
+
+                    {#<p>Submitted {{ recipe.createdAt |date }}</p>#} 
+                    <p>Duration : {{ recipe.duration }} min</p>
+                    <small style="color: teal;">By {{ recipe.user.firstname }} {{ recipe.user.lastname }}</small>
+
+                </div>        
+            {% else %}
+                <p>Pas encore de recette</p>
+            {% endfor %}
+        </div>
+    </div>    
+
+{% endblock %}

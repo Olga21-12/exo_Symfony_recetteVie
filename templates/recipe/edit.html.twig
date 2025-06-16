@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{#{% block title %}Liste des recettes{% endblock %}#}
+{% block title "Edit de recette" %}
+
+{% block body %}
+<div class = "row">
+    <div class="col-md-6 mx-auto">
+        <h1>Edit de recette <br> {{ recipe.title |title }}</h1>
+
+            {{ form(monForm) }}
+
+    </div>
+</div>
+{# способ стилизирования формы, обязательно начинать с form_start и заканчивать form_end   
+{{ form_start(monForm) }}
+    <div class = "d-flex">
+        {{ form_row(monForm.title) }}
+        {{ form_row(monForm.duration) }}
+    </div>
+{{ form_end(monForm) }}
+</div>#}
+{% endblock %}
