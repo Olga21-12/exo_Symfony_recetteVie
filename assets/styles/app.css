@@ -118,3 +118,114 @@ footer span {
     background-color: blue;
 }
 
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+form input.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+form input.form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 128, 128, 0.2);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #006666;
+}
+
+form a {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+form a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.show-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.recipe-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.creator, .duration {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.recipe-content {
+    text-align: left;
+    margin: 20px 0;
+    line-height: 1.6;
+    color: #444;
+}
+
+.dates {
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-sm {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+}
+
+

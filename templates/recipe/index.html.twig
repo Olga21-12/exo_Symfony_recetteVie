@@ -39,7 +39,7 @@
 
                     {#<p>Submitted {{ recipe.createdAt |date }}</p>#} 
                     <p>Duration : {{ recipe.duration }} min</p>
-                    <small style="color: teal;">By {{ recipe.user.firstname }} {{ recipe.user.lastname }}</small>
+                    <small style="color: teal;">By {{ recipe.user.firstname }} {#{{ recipe.user.lastname }}#}</small>
 
                 </div>        
             {% else %}
