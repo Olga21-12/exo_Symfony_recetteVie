@@ -1,0 +1,19 @@
+#Title : "Intitulé de la recette"
+#Content : "Commen faire :"
+#Duration : "Temps approximatif"
+#Image name : "Illustration"
+#Save : "Enregistrer"
+
+navBar: 
+  home : "Accueil"
+  recipes : "Liste des Recettes"
+  addRecipe : "Ajouter une Recette"
+  login : "Connexion"
+  logout : "Déconnexion"
+
+recipeForm:
+  title : "Titre"
+  content : "Comment faire :"
+  imageName : "Illustration"
+  duration : "Durée en minutes"
+  save : "Sauvegarder"

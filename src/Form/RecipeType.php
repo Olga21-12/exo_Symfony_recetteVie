@@ -20,25 +20,41 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class,[
-                'label'=>'Titre', // замена имени поля
-                'constraints' => new Length(min: 10, minMessage: "Valeur trop petite, 10 minimum")
-                ])
+
+        /*
+            ->add('title', TextType::class
+            ,['label'=>'Titre', // замена имени поля
+                'constraints' => new Length(min: 10, minMessage: "Valeur trop petite, 10 minimum")]
+               )
                 
-            ->add('slug', HiddenType::class)
-            ->add('content', TextareaType::class)
-          //  ->add('createdAt', null, ['widget' => 'single_text',])
-           // ->add('updatedAt', null, ['widget' => 'single_text',])
-            ->add('duration')
-            ->add('imageName', TextType::class, [
-                'label' => 'Image (url)',
-                'required' => false, // поле не обязательно для заполнения
+            ->add('slug', HiddenType::class,[
+                'required'=>false
             ])
+            ->add('content', TextareaType::class)
+           ->add('createdAt', null, ['widget' => 'single_text',])
+            ->add('updatedAt', null, ['widget' => 'single_text',])
+            ->add('duration')
+            ->add('imageName'
+            , TextType::class, ['label' => 'Image (url)','required' => false, // поле не обязательно для заполнения]
+            )
+            ->add('save', SubmitType::class
+            , ['label'=>'Envoyer']
+            ) кнопка для формы, по умолчанию название Save, при 'label'=>'Envoyer' меняется название на Envoyer
+            ->addEventListener(FormEvents::PRE_SUBMIT, $this->autoSlug(...))*/
+
+            ->add('title', TextType::class, [
+                'label' => 'recipeForm.title'])
+            ->add('slug', HiddenType::class)
+            ->add('content', TextareaType::class, [
+                'label' => 'recipeForm.content']) 
+            ->add('duration', TextType::class, [
+                'label' => 'recipeForm.duration'])
+            ->add('imageName', TextType::class, [
+                'label' => 'recipeForm.imageName'])   
             ->add('save', SubmitType::class, [
-                'label'=>'Envoyer'
-            ]) // кнопка для формы, по умолчанию название Save, при 'label'=>'Envoyer' меняется название на Envoyer
-            ->addEventListener(FormEvents::PRE_SUBMIT, $this->autoSlug(...))
-        ;
+                'label' => 'recipeForm.save']) // кнопка для формы, по умолчанию название Save, при 'label'=>'Envoyer' меняется название на Envoyer
+            ->addEventListener(FormEvents::PRE_SUBMIT, $this->autoSlug(...))    
+            ;
     }
 
     public function autoSlug(PreSubmitEvent $event): void{

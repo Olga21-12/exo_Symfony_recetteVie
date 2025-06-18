@@ -118,6 +118,7 @@ footer span {
     background-color: blue;
 }
 
+/* Login */
 .login-container {
     max-width: 400px;
     margin: 50px auto;
@@ -178,6 +179,8 @@ form a:hover {
     text-decoration: underline;
 }
 
+/* Show Container */
+
 .show-container {
     max-width: 600px;
     margin: 50px auto;
@@ -227,5 +230,11 @@ form a:hover {
     font-size: 0.9rem;
     border-radius: 6px;
 }
+
+/* Editor */
+
+/* Enregistrer */
+
+/* Ajouter */
 
 

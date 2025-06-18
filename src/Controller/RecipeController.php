@@ -125,6 +125,7 @@ final class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $recipe->setUser($this->getUser()); // для того чтобы пользователь мог создавать свои рецепты
             $recipe->setCreatedAt(new DateTimeImmutable());
             $recipe->setUpdatedAt(new DateTimeImmutable());
             $em->persist($recipe);
