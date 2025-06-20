@@ -2,23 +2,23 @@
         <nav class="nav-footer">
             <ul class="nav-footer-list">
                 <li>
-                    <a class="nav-link {{app.current_route == 'home' ? 'active' : ''}}" "href={{ path('home') }}">{{'navBar.home'|trans}}</a>
+                    <a class="nav-link {{app.current_route == 'home' ? 'active' : ''}}" "href={{ path('home') }}">{{'footerNavBar.home'|trans}}</a>
                 </li>
                 <li>
-                    <a class="nav-link {{app.current_route == 'app_recipe_show' or app.current_route == 'app_recipe_index' ? 'active' : ''}}" "href={{ path('app_recipe_index') }}">{{'navBar.recipes'|trans}}</a>
+                    <a class="nav-link {{app.current_route == 'app_recipe_show' or app.current_route == 'app_recipe_index' ? 'active' : ''}}" "href={{ path('app_recipe_index') }}">{{'footerNavBar.recipes'|trans}}</a>
                 </li>
                 {% if app.user %}
                 <li class="nav-item ">
-                    <a class="nav-link {{ app.current_route == 'app_recipe_create' ? 'active' : '' }}" href={{ path('app_recipe_create') }}>{{'navBar.addRecipe'|trans}}</a>
+                    <a class="nav-link {{ app.current_route == 'app_recipe_create' ? 'active' : '' }}" href={{ path('app_recipe_create') }}>{{'footerNavBar.addRecipe'|trans}}</a>
                 </li>
                 
                 <li class="nav-item ">
-                    <a class="nav-link" href={{ path('app_logout') }}>{{'navBar.logout'|trans}}</a>
+                    <a class="nav-link" href={{ path('app_logout') }}>{{'footerNavBar.logout'|trans}}</a>
                 </li>
                 {% else %}
 
                 <li class="nav-item ">
-                    <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href={{ path('app_login') }}>{{'navBar.login'|trans}}</a>
+                    <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href={{ path('app_login') }}>{{'footerNavBar.login'|trans}}</a>
                 </li>
                 {% endif %}
                 

@@ -4,12 +4,15 @@
 #Image name : "Illustration"
 #Save : "Enregistrer"
 
-navBar: 
+navBar:
   home : "Accueil"
-  recipes : "Liste des Recettes"
+  recipes : "Recettes"
   addRecipe : "Ajouter une Recette"
+  account : "Mon Compte"
+  register : "S'enregistrer"
   login : "Connexion"
-  logout : "Déconnexion"
+  logout : "Déconnexion"    
+
 
 recipeForm:
   title : "Titre"
@@ -17,3 +20,10 @@ recipeForm:
   imageName : "Illustration"
   duration : "Durée en minutes"
   save : "Sauvegarder"
+  
+  footerNavBar: 
+  home : "Accueil"
+  recipes : "Liste des Recettes"
+  addRecipe : "Ajouter une Recette"
+  login : "Connexion"
+  logout : "Déconnexion"
