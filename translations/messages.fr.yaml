@@ -1,29 +1,23 @@
-#Title : "Intitulé de la recette"
-#Content : "Commen faire :"
-#Duration : "Temps approximatif"
-#Image name : "Illustration"
-#Save : "Enregistrer"
+navBar.home: Accueil
+navBar.recipes: Recettes
+navBar.addRecipe: 'Ajouter une Recette'
+navBar.account: 'Mon Compte'
+navBar.register: "S'enregistrer"
+navBar.login: Connexion
+navBar.logout: Déconnexion
+recipeForm.title: Titre
+recipeForm.content: 'Comment faire :'
+recipeForm.imageName: Illustration
+recipeForm.duration: 'Durée en minutes'
+recipeForm.save: Sauvegarder
+footerNavBar.home: Accueil
+footerNavBar.recipes: 'Liste des Recettes'
+footerNavBar.addRecipe: 'Ajouter une Recette'
+footerNavBar.login: Connexion
+footerNavBar.logout: Déconnexion
+registrationForm.firstname: Prénom
+registrationForm.lastname : 'Nom de famille'
+registrationForm.email : E-Mail
+registrationForm.agreeTerms : "J'accepte les termes et conditions"
+registrationForm.password : 'Mot de passe'
 
-navBar:
-  home : "Accueil"
-  recipes : "Recettes"
-  addRecipe : "Ajouter une Recette"
-  account : "Mon Compte"
-  register : "S'enregistrer"
-  login : "Connexion"
-  logout : "Déconnexion"    
-
-
-recipeForm:
-  title : "Titre"
-  content : "Comment faire :"
-  imageName : "Illustration"
-  duration : "Durée en minutes"
-  save : "Sauvegarder"
-  
-  footerNavBar: 
-  home : "Accueil"
-  recipes : "Liste des Recettes"
-  addRecipe : "Ajouter une Recette"
-  login : "Connexion"
-  logout : "Déconnexion"

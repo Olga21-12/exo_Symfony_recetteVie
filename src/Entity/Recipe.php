@@ -13,7 +13,7 @@ use App\Entity\Traits\Timestampable;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\Table(name: "recipes")]
-#[UniqueEntity('title', message: "Ce titre existe déjà")] // добавляется чтобы не сохранялось с названием, которое уже существует
+#[UniqueEntity('title')] // добавляется чтобы не сохранялось с названием, которое уже существует
 class Recipe
 {
     #[ORM\Id]
@@ -22,9 +22,9 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank(message: "Titre obligatoire")]  // добавляется чтобы не сохранялось с пустой строкой
-    #[Assert\Length(min: 10, minMessage: "Valeur trop petite, Vous devez avoir un titre de minimum 10 caractéres")] // добавляется чтобы не сохранялось с названием менее 10 символов
-    #[Assert\Length(max: 50, maxMessage: "Valeur trop grande, 50 maximum")] // добавляется чтобы не сохранялось с названием более 255 символов
+    #[Assert\NotBlank()]  // добавляется чтобы не сохранялось с пустой строкой
+    #[Assert\Length(min: 10)] // добавляется чтобы не сохранялось с названием менее 10 символов
+    #[Assert\Length(max: 50)] // добавляется чтобы не сохранялось с названием более 255 символов
     // #[Assert\Length(max: 50, min: 10)] // добавляется чтобы не сохранялось с названием более 50 символов и менее 10
     //#[Assert\NotEqualTo("Merde", message: "Le mot 'Merde' n'est pas autorisé dans le titre.")] // добавляется чтобы не сохранялось с названием содержащим слово "Merde"
     #[InappropriateWords()]
@@ -34,8 +34,8 @@ class Recipe
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: "Content obligatoire")] // добавляется чтобы не сохранялось с пустой строкой
-    #[Assert\Length(min: 20, minMessage: "Valeur trop petite, 20 minimum")] // добавляется чтобы не сохранялось с описанием менее 20 символов
+    #[Assert\NotBlank()] // добавляется чтобы не сохранялось с пустой строкой
+    #[Assert\Length(min: 20)] // добавляется чтобы не сохранялось с описанием менее 20 символов
     private ?string $content = null;
 
     use Timestampable;
@@ -43,12 +43,12 @@ class Recipe
     
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Positive(message: "Valeur trop petite, 1 minimum")] // добавляется чтобы не сохранялось с значением менее 1 минуты
-    #[Assert\LessThan(1440, message: "Valeur trop grande, 1440 maximum")] // добавляется чтобы не сохранялось с значением более 1440 минут (24 часа)
+    #[Assert\Positive()] // добавляется чтобы не сохранялось с значением менее 1 минуты
+    #[Assert\LessThan(1440)] // добавляется чтобы не сохранялось с значением более 1440 минут (24 часа)
     private ?int $duration = null;
 
     #[ORM\Column(length: 500, nullable: true)]
-    private ?string $imageName = "https://cdn-icons-png.flaticon.com/512/4054/4054617.png";
+    private ?string $imageName = "https://cdn-icons-png.flaticon.com/512/4054/4054617.png"; //ссылка для фото по умолчанию
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
