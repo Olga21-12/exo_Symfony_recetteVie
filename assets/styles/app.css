@@ -40,6 +40,15 @@ img{
     width: 50%;
 }
 
+/* навигация */
+
+.logo-img {
+    height: 40px; /* или 40px, как тебе больше нравится */
+    width: auto;
+    border-radius: 30px;
+}
+
+
 .custom-nav .nav-link {
     text-decoration: none;
     margin-left: 20px;
@@ -49,6 +58,33 @@ img{
 .custom-nav .nav-link:hover {
     color: var(--secondary-color) !important; /* красивый жёлто-золотистый при наведении */
 }
+
+/* Начальные стили навбара */
+.navbar {
+    transition: background-color 0.4s ease, padding 0.4s ease;
+}
+
+/* Стили при скролле */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.7); /* полупрозрачный */
+    backdrop-filter: blur(8px); /* эффект стекла */
+}
+
+/* Стили логотипа */
+.logo-img {
+    height: 40px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+/* Стили логотипа при скролле */
+.navbar.scrolled .logo-img {
+    opacity: 0.7;
+    height: 30px; /* уменьшен */
+}
+
+
+/* футер */
 
 footer{
     display: flex;

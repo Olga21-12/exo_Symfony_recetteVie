@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href={{ path ('home') }}>RecetteVie</a>
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ path('home') }}">
+            <img src="{{ asset('logo.png') }}" alt="Logo" class="logo-img">
+            <span>Grandma'sRecipes</span>
+        </a>
 
             <!-- Кнопка для мобильного вида -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -22,7 +25,7 @@
                     <a class="nav-link {{ app.current_route == 'app_recipe_create' ? 'active' : '' }}" href={{ path('app_recipe_create') }}>Ajouter une Recette</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ app.current_route == 'app_account' ? 'active' : '' }}" href="#">Account</a>
+                    <a class="nav-link {{ app.current_route == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">Account</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href={{ path('app_logout') }}>Logout</a>
@@ -30,7 +33,7 @@
                 {% else %}
 
                 <li class="nav-item ">
-                    <a class="nav-link {{ app.current_route == 'app_register' ? 'active' : '' }}" href="#">S'enregister</a>
+                    <a class="nav-link {{ app.current_route == 'app_register' ? 'active' : '' }}" href="{{ path('app_register') }}">S'enregister</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ app.current_route == 'app_login' ? 'active' : '' }}" href={{ path('app_login') }}>Login</a>
