@@ -69,13 +69,14 @@ img{
     width: 100%;
     z-index: 1000;
     transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+    background-color: rgb(33, 37, 41);
 }
 
 /* Стили при скролле */
 .navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important; /* плавная тень */
+    background-color: rgba(60, 58, 58, 0.7);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* плавная тень */
 }
 
 /* Стили логотипа */
@@ -152,6 +153,8 @@ footer span {
     color: white;
     text-align: center;
 }
+
+/* Сообщения */
   
 .alert-success {
     background-color: green;
@@ -165,9 +168,9 @@ footer span {
     background-color: blue;
 }
 
-/* Login */
-.login-container {
-    max-width: 400px;
+/* form login, add, edit, register */
+.form-container {
+    max-width: 75%;
     margin: 50px auto;
     background-color: white;
     padding: 30px;
@@ -229,7 +232,7 @@ form a:hover {
 /* Show Container */
 
 .show-container {
-    max-width: 600px;
+    max-width: 75%px;
     margin: 50px auto;
     background-color: white;
     padding: 30px;
@@ -239,7 +242,7 @@ form a:hover {
 }
 
 .recipe-image {
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -278,10 +281,30 @@ form a:hover {
     border-radius: 6px;
 }
 
-/* Editor */
+/* backToTop */
 
-/* Enregistrer */
+#backToTop {
+    display: none; /* по умолчанию скрыта */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    font-size: 30px;
+    background-color: #05dcdc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: opacity 0.5s ease, visibility 0.1s ease;
+}
 
-/* Ajouter */
+#backToTop:hover {
+    background-color: #006666;
+    transform: scale(1.1);
+}
+
+
 
 

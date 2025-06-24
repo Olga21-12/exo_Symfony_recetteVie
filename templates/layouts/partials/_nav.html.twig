@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center gap-2" href="{{ path('home') }}">
             <img src="{{ asset('logo.png') }}" alt="Logo" class="logo-img">
@@ -25,7 +25,7 @@
                     <a class="nav-link {{ app.current_route == 'app_recipe_create' ? 'active' : '' }}" href={{ path('app_recipe_create') }}>{{'navBar.addRecipe'|trans}}</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ app.current_route == 'app_account' ? 'active' : '' }}" href="{{ path('app_account') }}">{{'navBar.account'|trans}}</a>
+                    <a class="nav-link {{ app.current_route == 'app_account' ? 'active' : '' }}" href="{{ path('home') }}">{{'navBar.account'|trans}}</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href={{ path('app_logout') }}>{{'navBar.logout'|trans}}</a>

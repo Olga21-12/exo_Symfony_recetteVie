@@ -4,13 +4,12 @@
 {% block title "Edit de recette" %}
 
 {% block body %}
-<div class = "row">
-    <div class="col-md-6 mx-auto">
-        <h1>Edit de recette <br> {{ recipe.title |title }}</h1>
+<div class="form-container">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Edit de recette <br> {{ recipe.title |title }}</h1>
 
             {{ form(monForm) }}
 
-    </div>
+    
 </div>
 {# способ стилизирования формы, обязательно начинать с form_start и заканчивать form_end   
 {{ form_start(monForm) }}
