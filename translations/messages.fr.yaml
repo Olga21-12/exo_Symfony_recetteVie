@@ -16,8 +16,8 @@ footerNavBar.addRecipe: 'Ajouter une Recette'
 footerNavBar.login: Connexion
 footerNavBar.logout: Déconnexion
 registrationForm.firstname: Prénom
-registrationForm.lastname : 'Nom de famille'
-registrationForm.email : E-Mail
-registrationForm.agreeTerms : "J'accepte les termes et conditions"
-registrationForm.password : 'Mot de passe'
-
+registrationForm.lastname: 'Nom de famille'
+registrationForm.email: E-Mail
+registrationForm.agreeTerms: "J'accepte les termes et conditions"
+registrationForm.password: 'Mot de passe'
+'Your email address is not verified': '__Your email address is not verified'

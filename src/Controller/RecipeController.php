@@ -9,18 +9,42 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+use App\Entity\User;
+
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
-
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RecipeController extends AbstractController
 {
-    // вариант с двумя страницами
+    // вариант с несколькими страницами
 
     #[Route(path :'/recette', name : 'app_recipe_index')] // стартовая страница
-   public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em): Response{
+   public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator): Response{
   
+    if($this->getUser()){
+
+         /**Add commentMore actions
+            * @var User
+            */
+
+        $user = $this->getUser();
+        if(!$user->isVerified()){
+            $this->addFlash("info","Your email addres is not verified !");
+        }
+    }
+
+         if ($this->getUser()) {
+         /** @var \App\Entity\User $user */
+             $user = $this->getUser();
+
+        if (!$user->isVerified()) {
+            $this->addFlash('info', $translator->trans('Your email address is not verified'));
+    }
+}
+
     $recipes = $repository->findAll();
     //$recipes = $repository->findRecipeDurationLowerThan(90); // отображение рецептов которые готовятся менее или 90 минут, условия прописаны в репозитории
     //dd($recipes); // отображает все атрибуты
@@ -99,6 +123,25 @@ final class RecipeController extends AbstractController
   // для страницы редактирования рецепта с помощью формы
   #[Route(path: "/recette/{id}/edit", name: "app_recipe_edit")]
         public function edit(Recipe $recipe, Request $request, EntityManagerInterface $em): Response{
+
+            if($this->getUser()){
+            /**
+            * @var User
+            */
+            $user = $this->getUser();
+            if(!$user->isVerified()){
+                $this->addFlash("error", "You must confirm your email to edit a Recipe !");
+                return $this->redirectToRoute('app_recipe_index');
+            }
+            if($user->getEmail() !== $recipe->getUser()->getEmail()){
+                $this->addFlash("error", "You must to be ". $recipe->getUser()->getEmail() . " to edit this Recipe !");
+                return $this->redirectToRoute('app_recipe_index');
+            }    
+        }else{
+            $this->addFlash("error", "You must login to edit a Recipe !");
+            return $this->redirectToRoute("app_login");
+        }
+
             // dd($recipe);
             //cet methode prend en premier parametre le formulaire que l'on souhaite utiliser en second parametre elle prend les données
             $form = $this->createForm(RecipeType::class, $recipe);
@@ -120,6 +163,21 @@ final class RecipeController extends AbstractController
     // для страницы создания рецепта с записью в базе данных
     #[Route(path : '/recette/create', name : 'app_recipe_create')]  
     public function create(Request $request, EntityManagerInterface $em) : Response {
+        
+        if($this->getUser()){
+            /**
+            * @var User
+            */
+            $user = $this->getUser();
+            if(!$user->isVerified()){
+                $this->addFlash("error", "You must confirm your email to create a Recipe !");
+                return $this->redirectToRoute('app_recipe_index');
+            }
+        }else{
+            $this->addFlash("error", "You must login to create a Recipe !");
+            return $this->redirectToRoute("app_login");
+        }
+        
         $recipe = new Recipe;
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
@@ -140,8 +198,30 @@ final class RecipeController extends AbstractController
 
     //для кнопки удаления рецепта
     #[Route(path: "/recette/{id}/delete", name: "app_recipe_delete")]
-        public function delete(Recipe $recipe, EntityManagerInterface $em): Response{
-            $title = $recipe->getTitle();
+        public function delete(Recipe $recipe, Request $request , EntityManagerInterface $em): Response{
+            // $title = $recipe->getTitle();
+
+            if($this->getUser()){
+            /**
+            * @var User
+            */
+            $user = $this->getUser();
+            if(!$user->isVerified()){
+                $this->addFlash("error", "You must confirm your email to delete a Recipe !");
+                return $this->redirectToRoute('app_recipe_index');
+            }
+            if($user->getEmail() !== $recipe->getUser()->getEmail()){
+                $this->addFlash("error", "You must to be ". $recipe->getUser()->getEmail() . " to delete this Recipe !");
+                return $this->redirectToRoute('app_recipe_index');
+            } 
+        }else{
+            $this->addFlash("error", "You must login to delete a Recipe !");
+            return $this->redirectToRoute("app_login");
+        }    
+        
+        
+        $title = $recipe->getTitle();
+
             $em->remove($recipe);
             $em->flush();
             $this->addFlash('info','La recette '.$title. ' a bien été suprimée !');
