@@ -21,3 +21,12 @@ registrationForm.email: E-Mail
 registrationForm.agreeTerms: "J'accepte les termes et conditions"
 registrationForm.password: 'Mot de passe'
 'Your email address is not verified': '__Your email address is not verified'
+accountShow.profile: 'Mon Profil'
+accountShow.Accountcreatedon: 'Date de création du compte : '
+accountShow.EditAccount: 'Éditer le profil'
+'Account successfuly updated !': '__Account successfuly updated !'
+'Update Profile': 'Mettre à jour le profil'
+
+'Apply changes': 'Appliquer les modifications'
+userForm.firstname: 'Prénom'
+userForm.lastname: 'Nom'

@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title 'Profile' %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello ! ✅</h1>
+<div class="row">
+    <div class="col-md-6 mx-auto text-center">
+    <h1>{{'accountShow.profile'|trans}}</h1>
+    {#<h1>Hello {{ recipe.user.firstname }} {{ recipe.user.lastname }} ! </h1>#}
+    <br>
+    <p>{{ app.user.email }}</p>
+    <h2>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</h2>
+    <p>{{'accountShow.Accountcreatedon'|trans}} {{app.user.createdAt|date("d/m/Y")}}</p>
+    <br>
+    <p>
+        <a class = "btn btn-primary btn-sm" href={{path('app_account_edit')}}>{{'accountShow.EditAccount'|trans}}</a>
+    </p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/cfitech/TutoSymfony/src/Controller/AccountController.php</code></li>
-        <li>Your template at <code>C:/cfitech/TutoSymfony/templates/account/index.html.twig</code></li>
-    </ul>
+    </div>
 </div>
 {% endblock %}
