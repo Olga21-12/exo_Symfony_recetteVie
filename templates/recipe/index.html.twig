@@ -8,6 +8,20 @@
 
 <h1>{{ recipes|length }} recettes</h1> {#отображает количество рецептов на странице#}
 
+<div class="container mb-4">
+    {{ form_start(searchForm, {'attr': {'class': 'row'}}) }}
+        <div class="col-md-10">
+            {{ form_widget(searchForm.query) }}
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100" style="background-color: var(--primary-color); border: none;">
+                Rechercher
+            </button>
+        </div>
+    {{ form_end(searchForm) }}
+</div>
+
+
 {# простое отображение списка рецептов
 <ul class="recipe-list">
 
@@ -33,9 +47,16 @@
                 <div class="card max-w-sm col-6 col-md-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4" data-type="post">
                     <h2><a href={{ path('app_recipe_show', {id : recipe.id, slug : recipe.slug})}}>{{ recipe.title | u.truncate(10,'...',false)}} </a></h2>
                     
-                    <div class="d-flex justify-content-center mb-3" style="height: 200px; overflow: hidden;">
-                        <img src="{{ recipe.imageName }}" alt="Image de la recette {{ recipe.title }}" class="img-fluid object-fit-cover" style="height: 100%; width: auto;">
-                    </div>
+                    {% if recipe.imageName %}
+                            <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}"
+                                 alt="Image de la recette {{ recipe.title }}"
+                                 class="img-fluid w-100 object-fit-cover"
+                                 style="height: 100%; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 100%;">
+                                <span class="text-muted">Pas d'image</span>
+                            </div>
+                        {% endif %}
 
                     {#<p>Submitted {{ recipe.createdAt |date }}</p>#} 
                     <p>Duration : {{ recipe.duration }} min</p>
@@ -47,5 +68,10 @@
             {% endfor %}
         </div>
     </div>    
+
+    <div class="navigation mt-4">
+    {{ knp_pagination_render(recipes) }}
+</div>
+
 
 {% endblock %}

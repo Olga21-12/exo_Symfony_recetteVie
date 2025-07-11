@@ -305,6 +305,48 @@ form a:hover {
     transform: scale(1.1);
 }
 
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li > a,
+.pagination li > span {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.pagination li > a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.pagination li.active > span {
+    background-color: var(--secondary-color);
+    color: black;
+    border-color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.pagination li.disabled > span {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 
 

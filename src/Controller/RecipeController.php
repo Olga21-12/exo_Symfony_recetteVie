@@ -14,7 +14,11 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
+use App\Data\SearchData;
+use App\Form\SearchType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
+
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RecipeController extends AbstractController
@@ -22,8 +26,35 @@ final class RecipeController extends AbstractController
     // вариант с несколькими страницами
 
     #[Route(path :'/recette', name : 'app_recipe_index')] // стартовая страница
-   public function index(Request $request, RecipeRepository $repository, EntityManagerInterface $em, TranslatorInterface $translator): Response{
-  
+   public function index(Request $request, 
+                        RecipeRepository $repository, 
+                        EntityManagerInterface $em, 
+                        TranslatorInterface $translator,
+                        PaginatorInterface $paginator): Response{
+
+        $searchData = new SearchData();
+    $form = $this->createForm(SearchType::class, $searchData);
+    $form->handleRequest($request);
+
+    $queryBuilder = $repository->createQueryBuilder('r');
+
+    if ($searchData->query) {
+        $queryBuilder
+            ->andWhere('r.title LIKE :q')
+            ->setParameter('q', '%' . $searchData->query . '%');
+    }
+
+    $recipes = $paginator->paginate(
+        $queryBuilder->getQuery(),
+        $request->query->getInt('page', 1),
+        9
+    );
+
+    return $this->render('recipe/index.html.twig', [
+        'recipes' => $recipes,
+        'searchForm' => $form->createView(),
+    ]);      
+
     if($this->getUser()){
 
          /**Add commentMore actions
@@ -45,7 +76,20 @@ final class RecipeController extends AbstractController
     }
 }
 
-    $recipes = $repository->findAll();
+
+    $query = $repository->createQueryBuilder('r')
+        ->orderBy('r.createdAt', 'DESC')
+        ->getQuery();
+
+    $recipes = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1), // текущая страница из URL
+        9 // количество рецептов на странице
+    );
+
+
+
+    //$recipes = $repository->findAll();
     //$recipes = $repository->findRecipeDurationLowerThan(90); // отображение рецептов которые готовятся менее или 90 минут, условия прописаны в репозитории
     //dd($recipes); // отображает все атрибуты
 

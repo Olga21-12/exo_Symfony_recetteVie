@@ -9,8 +9,20 @@
     <h1>{{'accountShow.profile'|trans}}</h1>
     {#<h1>Hello {{ recipe.user.firstname }} {{ recipe.user.lastname }} ! </h1>#}
     <br>
-    <p>{{ app.user.email }}</p>
+
+    {# Показываем фото профиля, если есть 
+        {% if app.user.image is not null %}
+            <img 
+            style="max-width: 250px;" 
+            src="{{ vich_uploader_asset(user, 'imageFile') | imagine_filter('profile_thumb') }}"
+            >
+
+        {% endif %} #}
+
+        <img style="max-width: 250px;" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+
     <h2>{{ app.user.firstname ~ ' ' ~ app.user.lastname }}</h2>
+    <p>{{ app.user.email }}</p>
     <p>{{'accountShow.Accountcreatedon'|trans}} {{app.user.createdAt|date("d/m/Y")}}</p>
     <br>
     <p>

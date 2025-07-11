@@ -15,6 +15,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints\Length;
 
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 class RecipeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -49,8 +51,14 @@ class RecipeType extends AbstractType
                 'label' => 'recipeForm.content']) 
             ->add('duration', TextType::class, [
                 'label' => 'recipeForm.duration'])
-            ->add('imageName', TextType::class, [
-                'label' => 'recipeForm.imageName'])   
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'recipeForm.image',
+                'required' => false,
+                'download_uri' => false,
+                'image_uri' => true,
+                'asset_helper' => true, // если ты используешь Twig `asset()` или CDN
+                'imagine_pattern' => 'recipe_thumbnail' // можно добавить если есть миниатюра
+])   
             ->add('save', SubmitType::class, [
                 'label' => 'recipeForm.save']) // кнопка для формы, по умолчанию название Save, при 'label'=>'Envoyer' меняется название на Envoyer
             ->addEventListener(FormEvents::PRE_SUBMIT, $this->autoSlug(...))    

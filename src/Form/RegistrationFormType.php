@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -53,6 +55,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('imageFile', VichImageType::class, [
+        'required' => false,
+        'label' => 'Фото профиля',
+        'download_uri' => false,
+        'image_uri' => false,
+    ])
         ;
     }
 

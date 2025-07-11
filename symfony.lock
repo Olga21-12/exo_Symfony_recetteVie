@@ -35,8 +35,24 @@
             "./migrations/.gitignore"
         ]
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v6.8.1"
+    },
     "knplabs/knp-time-bundle": {
         "version": "v2.4.0"
+    },
+    "liip/imagine-bundle": {
+        "version": "2.13",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.8",
+            "ref": "d1227d002b70d1a1f941d91845fcd7ac7fbfc929"
+        },
+        "files": [
+            "./config/packages/liip_imagine.yaml",
+            "./config/routes/liip_imagine.yaml"
+        ]
     },
     "phpunit/phpunit": {
         "version": "9.6",
@@ -325,5 +341,14 @@
     },
     "twig/extra-bundle": {
         "version": "v3.20.0"
+    },
+    "vich/uploader-bundle": {
+        "version": "2.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.13",
+            "ref": "1b3064c2f6b255c2bc2f56461aaeb76b11e07e36"
+        }
     }
 }

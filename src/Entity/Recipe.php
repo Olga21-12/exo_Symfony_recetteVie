@@ -11,9 +11,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // добавл�
 
 use App\Entity\Traits\Timestampable;
 
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ORM\Table(name: "recipes")]
 #[UniqueEntity('title')] // добавляется чтобы не сохранялось с названием, которое уже существует
+#[Vich\Uploadable]
 class Recipe
 {
     #[ORM\Id]
@@ -38,21 +42,66 @@ class Recipe
     #[Assert\Length(min: 20)] // добавляется чтобы не сохранялось с описанием менее 20 символов
     private ?string $content = null;
 
-    use Timestampable;
-
-    
+    use Timestampable;    
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()] // добавляется чтобы не сохранялось с значением менее 1 минуты
     #[Assert\LessThan(1440)] // добавляется чтобы не сохранялось с значением более 1440 минут (24 часа)
     private ?int $duration = null;
 
-    #[ORM\Column(length: 500, nullable: true)]
-    private ?string $imageName = "https://cdn-icons-png.flaticon.com/512/4054/4054617.png"; //ссылка для фото по умолчанию
-
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    // 👇 Фото для рецепта (имя файла)
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = 'sans_photo.png';
+
+    // 👇 Размер файла (необязательно)
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    // 👇 Поле для загрузки файла (через Vich)
+    #[Vich\UploadableField(mapping: 'recipe_image', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    // ================================
+    // ✅ Геттеры и сеттеры для изображения
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+
 
     public function getId(): ?int
     {
@@ -93,9 +142,7 @@ class Recipe
         $this->content = $content;
 
         return $this;
-    }
-
-    
+    }    
 
     public function getDuration(): ?int
     {
@@ -105,18 +152,6 @@ class Recipe
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
-
-        return $this;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function setImageName(?string $imageName): static
-    {
-        $this->imageName = $imageName;
 
         return $this;
     }
@@ -132,5 +167,15 @@ class Recipe
 
         return $this;
     }
+
+    public function __serialize(): array
+{
+    return [
+        'id' => $this->id,
+        'email' => $this->email,
+        'password' => $this->password,
+    ];
+}
+
 
 }
