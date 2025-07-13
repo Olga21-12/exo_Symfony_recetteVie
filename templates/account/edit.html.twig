@@ -4,8 +4,8 @@
 
 {% block body %}
 
-<div class="row">
-    <div class="col-md-6 mx-auto text-center">
+<div class="row ">
+    <div class="col-md-6 mx-auto text-center form-container">
     <h1 class="text-center my-5">{{'Update Profile'|trans}}</h1>
    
     {{form_start(userForm)}}
@@ -13,9 +13,9 @@
     {{form_row(userForm.lastname)}}
     {{ form_row(userForm.imageFile) }}
     <br>
-    <p>
+    
         <button type="submit" >{{'Apply changes'|trans}}</button>
-    </p>
+    
 {{form_end(userForm)}}
     </div>
 </div>
