@@ -206,7 +206,9 @@ form input.form-control:focus {
 }
 
 button[type="submit"] {
-    width: 100%;
+    display: block;
+    width: 50%;
+    margin: auto;
     padding: 10px;
     background-color: var(--primary-color);
     border: none;
@@ -351,6 +353,10 @@ form a:hover {
 .pagination li.disabled > span {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.container-search{
+    max-width: 75%;
 }
 
 
