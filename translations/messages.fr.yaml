@@ -1,3 +1,5 @@
+vich_uploader.form_label.delete_confirm: 'Supprimer?'
+vich_uploader.link.download: Télécharger
 navBar.home: Accueil
 navBar.recipes: Recettes
 navBar.addRecipe: 'Ajouter une Recette'
@@ -20,13 +22,14 @@ registrationForm.lastname: 'Nom de famille'
 registrationForm.email: E-Mail
 registrationForm.agreeTerms: "J'accepte les termes et conditions"
 registrationForm.password: 'Mot de passe'
-'Your email address is not verified': '__Your email address is not verified'
+registrationForm.photoDeProfil: 'Photo de profil'
+'Your email address is not verified': 'Your email address is not verified'
 accountShow.profile: 'Mon Profil'
 accountShow.Accountcreatedon: 'Date de création du compte : '
 accountShow.EditAccount: 'Éditer le profil'
-'Account successfuly updated !': '__Account successfuly updated !'
+'Account successfuly updated !': 'Account successfuly updated !'
 'Update Profile': 'Mettre à jour le profil'
-
 'Apply changes': 'Appliquer les modifications'
-userForm.firstname: 'Prénom'
-userForm.lastname: 'Nom'
+userForm.firstname: Prénom
+userForm.lastname: Nom
+accountController.edit.mustLogin: 'Vous devez être connecté pour modifier votre compte'
