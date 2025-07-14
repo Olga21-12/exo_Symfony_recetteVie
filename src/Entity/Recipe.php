@@ -179,14 +179,14 @@ class Recipe
         return $this;
     }
 
-  public function __serialize(): array
+ /* public function __serialize(): array
 {
     return [
         'id' => $this->id,
         'email' => $this->email,
         'password' => $this->password,
     ];
-}
+}*/
 
     /**
      * @return Collection<int, Comment>

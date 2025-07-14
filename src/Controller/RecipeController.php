@@ -34,7 +34,8 @@ final class RecipeController extends AbstractController
                         TranslatorInterface $translator,
                         PaginatorInterface $paginator): Response{
 
-        $searchData = new SearchData();
+       
+    $searchData = new SearchData();
     $form = $this->createForm(SearchType::class, $searchData);
     $form->handleRequest($request);
 
@@ -52,9 +53,12 @@ final class RecipeController extends AbstractController
         9
     );
 
+    $totalRecipes = $repository->count([]);
+
     return $this->render('recipe/index.html.twig', [
         'recipes' => $recipes,
         'searchForm' => $form->createView(),
+        'totalRecipes' => $totalRecipes,
     ]);      
 
     if($this->getUser()){
@@ -88,6 +92,7 @@ final class RecipeController extends AbstractController
         $request->query->getInt('page', 1), // текущая страница из URL
         9 // количество рецептов на странице
     );
+
 
 
 
