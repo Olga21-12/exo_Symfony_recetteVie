@@ -249,7 +249,7 @@ form a:hover {
 }
 
 .recipe-image {
-    max-width: 50%;
+    max-width: 500px;
     height: auto;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -358,6 +358,83 @@ form a:hover {
 .container-search{
     max-width: 75%;
 }
+
+
+/* === Commentaires === */
+.comment-title {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.comment-card {
+    max-width: 75%;
+    margin: auto;
+    display: flex;
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.comment-header {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.comment-body {
+    flex: 1;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.comment-author {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.comment-content {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.comment-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.comment-add-title {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.comment-form-container {
+    max-width: 75%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
 
 
 

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use App\Validator\InappropriateWords;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert; // добавляется чтобы не сохранялось с пустой строкой
@@ -65,6 +67,17 @@ class Recipe
     #[Vich\UploadableField(mapping: 'recipe_image', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'recipe')]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
     // ================================
     // ✅ Геттеры и сеттеры для изображения
     public function setImageFile(?File $imageFile = null): void
@@ -100,8 +113,6 @@ class Recipe
     {
         $this->imageSize = $imageSize;
     }
-
-
 
     public function getId(): ?int
     {
@@ -168,7 +179,7 @@ class Recipe
         return $this;
     }
 
-    public function __serialize(): array
+  public function __serialize(): array
 {
     return [
         'id' => $this->id,
@@ -176,6 +187,36 @@ class Recipe
         'password' => $this->password,
     ];
 }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getRecipe() === $this) {
+                $comment->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 }

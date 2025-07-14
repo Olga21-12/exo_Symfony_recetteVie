@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Recipe;
 use App\Form\RecipeType;
 use App\Data\SearchData;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\SearchType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
@@ -142,7 +144,7 @@ final class RecipeController extends AbstractController
    /* public function show(): Response
     {return new Response("Bienvenue sur la page des recettes !!!");}*/
 
-    public function show(Request $request, string $slug, int $id, RecipeRepository $repository): Response{
+    public function show(Request $request, string $slug, int $id, RecipeRepository $repository, EntityManagerInterface $em): Response{
         //dd($request); отображает все атрибуты
         //dd($slug, $id); // отображает только название и id
 
@@ -154,14 +156,47 @@ final class RecipeController extends AbstractController
             ]);
         }
         
-        return $this->render('recipe/show.html.twig', [
+      /*  return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
             'id' => $id,
             'user' => [
                 "firstname" => "Olga",
                 "lastname" => "P"
             ]
-        ]);
+        ]);*/
+
+           // === 💬 Добавление комментария ===
+    $comment = new Comment();
+$comment->setCreatedAt(new \DateTimeImmutable());
+$comment->setRecipe($recipe);
+
+$form = $this->createForm(CommentType::class, $comment, [
+    'is_user' => $this->getUser() !== null,
+]);
+
+$form->handleRequest($request);
+
+if ($form->isSubmitted() && $form->isValid()) {
+    if ($this->getUser()) {
+        $comment->setUser($this->getUser());
+    }
+
+    $em->persist($comment);
+    $em->flush();
+    $this->addFlash('success', 'Commentaire ajouté !');
+    return $this->redirectToRoute('app_recipe_show', [
+        'id' => $recipe->getId(),
+        'slug' => $recipe->getSlug()
+    ]);
+}
+
+return $this->render('recipe/show.html.twig', [
+    'recipe' => $recipe,
+    'commentForm' => $form->createView(),
+    'comments' => $recipe->getComments()
+]);
+
+
 }
 
   // для страницы редактирования рецепта с помощью формы
@@ -202,6 +237,8 @@ final class RecipeController extends AbstractController
                 'monForm' => $form,
                 'recipe' => $recipe
             ]);
+
+
         }
 
     // для страницы создания рецепта с записью в базе данных

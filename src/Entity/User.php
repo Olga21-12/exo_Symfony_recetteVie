@@ -79,6 +79,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $imageSize = null;
 
     /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user')]
+    private Collection $comments;
+
+    /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
@@ -128,6 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     use Timestampable; // добавляется чтобы не сохранялось с пустой строкой
@@ -280,6 +287,36 @@ public function __serialize(): array
         'email' => $this->email,
         'password' => $this->password,
     ];
+}
+
+/**
+ * @return Collection<int, Comment>
+ */
+public function getComments(): Collection
+{
+    return $this->comments;
+}
+
+public function addComment(Comment $comment): static
+{
+    if (!$this->comments->contains($comment)) {
+        $this->comments->add($comment);
+        $comment->setUser($this);
+    }
+
+    return $this;
+}
+
+public function removeComment(Comment $comment): static
+{
+    if ($this->comments->removeElement($comment)) {
+        // set the owning side to null (unless already changed)
+        if ($comment->getUser() === $this) {
+            $comment->setUser(null);
+        }
+    }
+
+    return $this;
 }
 
 }

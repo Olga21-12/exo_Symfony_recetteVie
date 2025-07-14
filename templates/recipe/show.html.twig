@@ -8,7 +8,7 @@
             <h1 class="text-center"> {{ recipe.title |title }}</h1>
            
            {% if recipe.imageName %}
-    <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" style="max-width: 250px;" class="recipe-image">
+    <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" class="recipe-image">
 {% endif %}
 
 
@@ -24,11 +24,48 @@
                 <small>Mise à jour le {{ recipe.updatedAt | date('d/m/Y H:i') }}</small>
             </div>
 
+<h3 class="comment-add-title">Commentaires</h3>
+
+{% for comment in comments %}
+    <div class="mb-3 p-3 border rounded comment-card ">
+        <div class="d-flex align-items-center mb-2 comment-header">
+            {% if comment.user %}
+                
+                <img src="{{ vich_uploader_asset(comment.user, 'imageFile') ?: asset('images/profiles/sans_photo.png') }}" alt="avatar" class="comment-avatar">
+                <strong class="comment-author">{{ comment.user.firstname }}</strong>
+            {% else %}
+                <img src="{{ asset('images/profiles/sans_photo.png') }}" alt="avatar invité" class="comment-avatar">
+                <strong class="comment-author">{{ comment.author ?? 'Invité' }}</strong>
+            {% endif %}
+        </div>
+        <div class="comment-body">
+        <p class="comment-content">{{ comment.content }}</p>
+        <small class="comment-date">{{ comment.createdAt|date('d/m/Y H:i') }}</small>
+    </div>
+    </div>
+{% else %}
+
+    <p>Aucun commentaire pour l'instant.</p>
+{% endfor %}
+
+<hr class="my-4">
+
+<h4 class="comment-add-title">Ajouter un commentaire</h4>
+
+
+<div class="comment-form-container">
+
+{{ form_start(commentForm) }}
+    {{ form_widget(commentForm) }}
+    <button class="btn btn-primary mt-2">Envoyer</button>
+{{ form_end(commentForm) }}
+</div>
+{#блок кнопок с условием #}
            <div class="btn-group">
-            {% if app.user.email is same as(recipe.user.email) %}
+        {# {% if app.user.email is same as(recipe.user.email) %}#}
                 <a class="btn btn-primary btn-sm" href="{{ path('app_recipe_edit', {id: recipe.id}) }}">Edit</a>
                 <a class="btn btn-danger btn-sm" href="{{ path('app_recipe_delete', {id: recipe.id}) }}" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</a>
-            {% endif %}
+        {# {% endif %}#}
                <a class="btn btn-secondary btn-sm" href="{{ path('app_recipe_index') }}">Go Back</a>
             
             </div>
@@ -37,5 +74,6 @@
 {# <p>Recette créée par {{ user.firstname ~" "~ user.lastname }}</p> #}
 {# {{ dump(user) }} #}
 {# {{ dump(app.current_route) }} #}
-    </div>
+ 
+</div>
 {% endblock %}
